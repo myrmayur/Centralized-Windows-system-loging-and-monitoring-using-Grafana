@@ -46,7 +46,7 @@ For Centralized Windows System Logging Using Winlogbeat
 To ensure Winlogbeat is installed on all centralized Windows machines in your company, follow these steps:
 
 1. **Prepare the Installation Script**:
-   - Open a text editor and copy your shell script into a new file, e.g., `install_winlogbeat.sh`.
+   - Open a text editor and copy your shell script into a new file, e.g., `install_winlogbeat.sh`. for refernce my powershell script is present in master brach.
    - Make sure the script is configured to install Winlogbeat silently without user intervention.
 
 2. **Store the Script on a Network Share**:
