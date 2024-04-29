@@ -1,0 +1,71 @@
+# Setting up Winlogbeat to Collect Windows Logs and Visualize Them in Grafana
+
+This guide will walk you through the process of setting up Winlogbeat on Windows to collect Windows logs and then visualizing them in Grafana via Elasticsearch.
+
+## Prerequisites
+
+Before you begin, ensure you have the following:
+
+- Windows machine(s) from which you want to collect logs
+- Ubuntu machine with Elasticsearch and Grafana installed
+
+## Step 1: Install and Configure Winlogbeat on Windows
+
+1. Download Winlogbeat from the official Elastic website: [Winlogbeat Downloads](https://www.elastic.co/downloads/beats/winlogbeat).
+2. Follow the installation instructions provided for your Windows version.
+3. Configure Winlogbeat to point to your Elasticsearch instance in `winlogbeat.yml` configuration file.
+   ```yaml
+   output.elasticsearch:
+     hosts: ["<your-elasticsearch-host>:9200"]
+   ```
+
+## Step 2: Install and Configure Elasticsearch on Ubuntu
+
+1. Install Elasticsearch by following the instructions in the official Elasticsearch documentation: [Install Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html).
+2. Make sure Elasticsearch is running and accessible from your Windows machine.
+
+## Step 3: Install and Configure Grafana on Ubuntu
+
+1. Install Grafana by following the instructions in the official Grafana documentation: [Install Grafana](https://grafana.com/docs/grafana/latest/installation/debian/).
+2. Access Grafana's web interface and set it up according to your preferences.
+
+## Step 4: Configure Grafana Dashboard for Windows Logs
+
+1. In Grafana, navigate to the Dashboards section.
+2. Import a pre-made dashboard for Windows logs or create a new one based on your requirements.
+3. Configure the data source to point to your Elasticsearch instance.
+
+## Step 5: View Windows Logs in Grafana
+
+1. Ensure Winlogbeat is running on your Windows machine(s).
+2. Navigate to the Grafana dashboard you configured to view the collected Windows logs.
+
+For Centralized Windows System Logging Using Winlogbeat
+## Step 6: Deploy Winlogbeat Installation Script Across Windows Machines
+
+To ensure Winlogbeat is installed on all centralized Windows machines in your company, follow these steps:
+
+1. **Prepare the Installation Script**:
+   - Open a text editor and copy your shell script into a new file, e.g., `install_winlogbeat.sh`.
+   - Make sure the script is configured to install Winlogbeat silently without user intervention.
+
+2. **Store the Script on a Network Share**:
+   - Place the `install_winlogbeat.sh` script on a network share that is accessible by all Windows machines.
+
+3. **Set Up Group Policy Object (GPO)**:
+   - Open the Group Policy Management Console (GPMC) on a domain controller.
+   - Create a new Group Policy Object (GPO) or use an existing one to apply the script to desired Windows machines.
+   
+4. **Edit the GPO**:
+   - Navigate to `Computer Configuration -> Policies -> Windows Settings -> Scripts (Startup/Shutdown)`.
+   - Add the `install_winlogbeat.sh` script to the startup scripts folder and link it to the appropriate domain or organizational unit (OU).
+   
+5. **Deploy the Script**:
+   - Restart the Windows machines or wait for the Group Policy to refresh to initiate the installation of Winlogbeat.
+   
+6. **Verify Installation**:
+   - Check if Winlogbeat is installed correctly on the Windows machines by verifying its presence in the Programs and Features list or through other means.
+
+By following these steps, you can automate the deployment of Winlogbeat across all centralized Windows machines in your company, ensuring consistent monitoring and logging.
+
+
